@@ -3,8 +3,10 @@ import './App.scss';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+import { routes } from './constants';
 import AppBar from './components/AppBar';
 
 function App() {
@@ -12,8 +14,19 @@ function App() {
     <div className="App">
       <Router>
         <AppBar />
+        <Redirect exact from="/" to="/home" />
         <Switch>
-
+          {
+            routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                render={props => (
+                  <route.component {...props} route={route.routes} />
+                )}
+              />
+            ))
+          }
         </Switch>
       </Router>
 
