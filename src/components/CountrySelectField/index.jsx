@@ -34,6 +34,7 @@ export default function CountrySelectField(props) {
       optionFilterProp="children"
       onChange={onChange}
       onSearch={onSearch}
+      defaultValue="all"
       filterOption={(input, option) => {
         // lấy giá trị child của thẻ Text nằm trong thẻ Option
         const countryName = option.children[1].props.children;
