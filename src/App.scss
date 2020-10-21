@@ -1,5 +1,9 @@
 @import '~antd/dist/antd.css';
 
+@import './styles/mixins';
+@import './styles/variables';
+@import './styles/not-found-page';
+
 .App {
     font-family:'Helvetica Neue';
     font-size: 1.5rem;
