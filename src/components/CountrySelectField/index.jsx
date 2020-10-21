@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Select, Typography } from "antd";
-import { Spin } from "antd";
+import { SecurityScanOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -41,11 +41,13 @@ export default function CountrySelectField(props) {
         return countryName.toLowerCase().indexOf(input.toLowerCase()) !== -1;
       }}
     >
-      {options.length === 0 ? (
-        <Option>
-          <Spin />
-        </Option>
-      ) : (
+      <Option value="all">
+        <SecurityScanOutlined style={{ width: "24px", marginRight: "5px" }} />
+        <Text level={3} type="danger">
+          All The World
+        </Text>
+      </Option>
+      {options.length !== 0 &&
         options.map((option) => (
           <Option key={option.countryInfo._id} value={option.countryInfo.iso2}>
             <img
@@ -55,8 +57,7 @@ export default function CountrySelectField(props) {
             />
             <Text>{option.country}</Text>
           </Option>
-        ))
-      )}
+        ))}
     </Select>
   );
 }
