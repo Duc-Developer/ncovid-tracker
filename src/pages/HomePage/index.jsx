@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col } from "antd";
 import { PageHeader, Button } from "antd";
 import { Typography } from "antd";
+import CountrySelectField from "../../components/CountrySelectField";
+import Axios from "../../api/axios";
 
 const { Title } = Typography;
 
 export default function HomePage() {
+  const [countries, setCountries] = useState([]);
+  useEffect(() => {
+    async function getData() {
+      const dataCountries = await Axios.get("countries").then(
+        (res) => res.data
+      );
+      setCountries(dataCountries);
+    }
+    getData();
+  }, [countries.length]);
+
+  function handleOptionValue(value) {
+    console.log(value);
+  }
+
   return (
     <div className="home-page">
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -14,7 +31,11 @@ export default function HomePage() {
             ghost={false}
             title={<Title level={3}>NCOVID TRACKER</Title>}
             extra={[
-              <Button key="2">Select field</Button>,
+              <CountrySelectField 
+              getValue={(value) => {handleOptionValue(value)}} 
+              options={countries} 
+              key="2" 
+              />,
               <Button key="1" type="primary">
                 More infor
               </Button>,
