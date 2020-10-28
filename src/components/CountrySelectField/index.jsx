@@ -34,7 +34,7 @@ export default function CountrySelectField(props) {
       optionFilterProp="children"
       onChange={onChange}
       onSearch={onSearch}
-      defaultValue="all"
+      defaultValue="All"
       filterOption={(input, option) => {
         // lấy giá trị child của thẻ Text nằm trong thẻ Option
         const countryName = option.children[1].props.children;
@@ -42,7 +42,7 @@ export default function CountrySelectField(props) {
         return countryName.toLowerCase().indexOf(input.toLowerCase()) !== -1;
       }}
     >
-      <Option value="all">
+      <Option value="All">
         <SecurityScanOutlined style={{ width: "24px", marginRight: "5px" }} />
         <Text level={3} type="danger">
           All The World

@@ -9,7 +9,7 @@ const { Title } = Typography;
 
 export default function HomePage() {
   const [countries, setCountries] = useState([]);
-  const [countryCurrent, setCountryCurrent] = useState("all");
+  const [countryCurrent, setCountryCurrent] = useState("All");
   useEffect(() => {
     async function getData() {
       const dataCountries = await Axios.get("countries").then(
@@ -30,7 +30,7 @@ export default function HomePage() {
         <Col lg={{ span: 16 }} xs={{ span: 24 }}>
           <PageHeader
             ghost={false}
-            title={<Title level={3}>NCOVID TRACKER</Title>}
+            title={<Title type="danger" level={3}>NCOVID TRACKER</Title>}
             extra={[
               <CountrySelectField 
               getValue={(value) => {handleOptionValue(value)}} 
