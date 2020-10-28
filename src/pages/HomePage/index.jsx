@@ -5,13 +5,18 @@ import { Typography } from "antd";
 import CountrySelectField from "../../components/CountrySelectField";
 import Axios from "../../api/axios";
 import CaseBoxInfor from "../../components/CaseBoxInfor";
+import Map from "../../components/Map";
 
 const { Title } = Typography;
+const initialCoordinates = { lat: 16, lng: 108 };
 
 export default function HomePage() {
   const [countries, setCountries] = useState([]);
   const [countryCurrent, setCountryCurrent] = useState("All");
   const [worldCase, setWorldCase] = useState({});
+  const [mapCenter, setMapCenter] = useState(initialCoordinates);
+  const [mapZoom, setMapZoom] = useState(3);
+  const [caseCurrent, setCaseCurrent] = useState("cases"); // recovered deaths
 
   useEffect(() => {
     async function getData() {
@@ -26,9 +31,24 @@ export default function HomePage() {
   }, [countries.length]);
 
   function handleOptionValue(value) {
+    const dataMatch = countries.find((item) => item.countryInfo.iso2 === value);
+    if (dataMatch) {
+      setMapCenter({
+        lat: dataMatch.countryInfo.lat,
+        lng: dataMatch.countryInfo.long,
+      });
+      setMapZoom(5);
+    } else {
+      setMapCenter(initialCoordinates);
+      setMapZoom(3);
+    }
     setCountryCurrent(value);
   }
-console.log(countries[0])
+
+  function switchCase(value) {
+    setCaseCurrent(value);
+  }
+
   return (
     <div className="home-page">
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -56,34 +76,111 @@ console.log(countries[0])
             <Row gutter={[8, 8]}>
               {countryCurrent === "All" ? (
                 <React.Fragment>
-                  <Col md={8} xs={24}>
-                    <CaseBoxInfor active title="Trường hợp nhiễm" primaryText={worldCase.todayCases} subTitle={worldCase.cases} />
+                  <Col
+                    onClick={() => {
+                      switchCase("cases");
+                    }}
+                    md={8}
+                    xs={24}
+                  >
+                    <CaseBoxInfor
+                      active={caseCurrent === "cases"}
+                      title="Trường hợp nhiễm"
+                      primaryText={worldCase.todayCases}
+                      subTitle={worldCase.cases}
+                    />
                   </Col>
-                  <Col md={8} xs={24}>
-                    <CaseBoxInfor type="safe" title="Đã chữa khỏi" primaryText={worldCase.todayRecovered} subTitle={worldCase.recovered} />
+                  <Col
+                    onClick={() => {
+                      switchCase("recovered");
+                    }}
+                    md={8}
+                    xs={24}
+                  >
+                    <CaseBoxInfor
+                      active={caseCurrent === "recovered"}
+                      type="safe"
+                      title="Đã chữa khỏi"
+                      primaryText={worldCase.todayRecovered}
+                      subTitle={worldCase.recovered}
+                    />
                   </Col>
-                  <Col md={8} xs={24}>
-                    <CaseBoxInfor title="Tử vong" primaryText={worldCase.todayDeaths} subTitle={worldCase.deaths} />
+                  <Col
+                    onClick={() => {
+                      switchCase("deaths");
+                    }}
+                    md={8}
+                    xs={24}
+                  >
+                    <CaseBoxInfor
+                      active={caseCurrent === "deaths"}
+                      title="Tử vong"
+                      primaryText={worldCase.todayDeaths}
+                      subTitle={worldCase.deaths}
+                    />
                   </Col>
                 </React.Fragment>
               ) : (
-                countries.filter(item => item.countryInfo.iso2 === countryCurrent)
-                .map(item => (
-                  <React.Fragment key={item.country}>
-                    <Col md={8} xs={24}>
-                    <CaseBoxInfor active title="Trường hợp nhiễm" primaryText={item.todayCases} subTitle={item.cases} />
-                  </Col>
-                  <Col md={8} xs={24}>
-                    <CaseBoxInfor type="safe" title="Đã chữa khỏi" primaryText={item.todayRecovered} subTitle={item.recovered} />
-                  </Col>
-                  <Col md={8} xs={24}>
-                    <CaseBoxInfor title="Tử vong" primaryText={item.todayDeaths} subTitle={item.deaths} />
-                  </Col>
-                  </React.Fragment>
-                ))
-              )
-            }
-              <Col span={24}>map</Col>
+                countries
+                  .filter((item) => item.countryInfo.iso2 === countryCurrent)
+                  .map((item) => (
+                    <React.Fragment key={item.country}>
+                      <Col
+                        onClick={() => {
+                          switchCase("cases");
+                        }}
+                        md={8}
+                        xs={24}
+                      >
+                        <CaseBoxInfor
+                          active={caseCurrent === "cases"}
+                          title="Trường hợp nhiễm"
+                          primaryText={item.todayCases}
+                          subTitle={item.cases}
+                        />
+                      </Col>
+                      <Col
+                        onClick={() => {
+                          switchCase("recovered");
+                        }}
+                        md={8}
+                        xs={24}
+                      >
+                        <CaseBoxInfor
+                          active={caseCurrent === "recovered"}
+                          type="safe"
+                          title="Đã chữa khỏi"
+                          primaryText={item.todayRecovered}
+                          subTitle={item.recovered}
+                        />
+                      </Col>
+                      <Col
+                        onClick={() => {
+                          switchCase("deaths");
+                        }}
+                        md={8}
+                        xs={24}
+                      >
+                        <CaseBoxInfor
+                          active={caseCurrent === "deaths"}
+                          title="Tử vong"
+                          primaryText={item.todayDeaths}
+                          subTitle={item.deaths}
+                        />
+                      </Col>
+                    </React.Fragment>
+                  ))
+              )}
+            </Row>
+            <Row>
+              <Col span={24}>
+                <Map
+                  caseType={caseCurrent}
+                  countries={countries}
+                  center={mapCenter}
+                  zoom={mapZoom}
+                />
+              </Col>
             </Row>
           </PageHeader>
         </Col>

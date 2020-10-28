@@ -1,9 +1,11 @@
 @import '~antd/dist/antd.css';
+@import url('https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
 
 @import './styles/mixins';
 @import './styles/variables';
 @import './styles/not-found-page';
 @import './styles/case-box-infor';
+@import './styles/map';
 
 .App {
     font-family:'Helvetica Neue';
