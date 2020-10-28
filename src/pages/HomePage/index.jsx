@@ -48,7 +48,7 @@ export default function HomePage() {
                 <CaseBoxInfor active />
               </Col>
               <Col lg={8} xs={24}>
-              <CaseBoxInfor />
+              <CaseBoxInfor type="safe" />
               </Col>
               <Col lg={8} xs={24}>
               <CaseBoxInfor />
