@@ -4,6 +4,7 @@ import { PageHeader, Button } from "antd";
 import { Typography } from "antd";
 import CountrySelectField from "../../components/CountrySelectField";
 import Axios from "../../api/axios";
+import CaseBoxInfor from "../../components/CaseBoxInfor";
 
 const { Title } = Typography;
 
@@ -21,7 +22,7 @@ export default function HomePage() {
   }, [countries.length]);
 
   function handleOptionValue(value) {
-    console.log(value);
+    setCountryCurrent(value);
   }
 
   return (
@@ -43,7 +44,15 @@ export default function HomePage() {
             ]}
           >
             <Row gutter={[8, 8]}>
-              <Col span={24}>list box infor</Col>
+              <Col lg={8} xs={24}>
+                <CaseBoxInfor active />
+              </Col>
+              <Col lg={8} xs={24}>
+              <CaseBoxInfor />
+              </Col>
+              <Col lg={8} xs={24}>
+              <CaseBoxInfor />
+              </Col>
               <Col span={24}>map</Col>
             </Row>
           </PageHeader>
