@@ -17,6 +17,11 @@ CaseBoxInfor.defaultProps = {
   type: "danger",
 };
 
+function formatNumber(number) {
+  let str = JSON.stringify(number);
+  return str.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+}
+
 export default function CaseBoxInfor(props) {
   const { title, primaryText, subTitle, active, type } = props;
   return (
@@ -25,13 +30,15 @@ export default function CaseBoxInfor(props) {
         <li className="case-box-infor__text--white">{title}</li>
         <li
           className={`
-        ${type === "danger" ? "case-box-infor__text--red " : ""}
+        ${type === "danger" ? " case-box-infor__text--red " : ""}
         ${type === "safe" ? "case-box-infor__text--green" : ""}
         `}
         >
-          {primaryText}
+          {`+${formatNumber(primaryText)}`}
         </li>
-        <li className="case-box-infor__text--white">{subTitle}</li>
+        <li className="case-box-infor__sub-title case-box-infor__text--white">
+          {formatNumber(subTitle)}
+        </li>
       </ul>
     </div>
   );

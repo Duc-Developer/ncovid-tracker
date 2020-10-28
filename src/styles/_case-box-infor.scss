@@ -25,4 +25,11 @@
   &--active {
     border-top: 5px solid rgb(255, 0, 0);
   }
+
+  &__sub-title::after {
+    content: ' total';
+    font-size: 0.8em;
+    color: rgb(168, 166, 166);
+  }
+
 }
