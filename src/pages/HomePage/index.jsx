@@ -9,6 +9,7 @@ const { Title } = Typography;
 
 export default function HomePage() {
   const [countries, setCountries] = useState([]);
+  const [countryCurrent, setCountryCurrent] = useState("all");
   useEffect(() => {
     async function getData() {
       const dataCountries = await Axios.get("countries").then(
