@@ -61,10 +61,16 @@ export default function Map(props) {
                     </div>
                     <div className="map__infor-name">{country.country}</div>
                     <div className="map__infor-cases">
-                      <ul>
-                        <li>Cases: {formatNumber(country.cases)}</li>
-                        <li>Recovered: {formatNumber(country.recovered)}</li>
-                        <li>Deaths: {formatNumber(country.deaths)}</li>
+                      <ul style={{ padding: 0}}>
+                        <li>
+                          <b>Cases:</b> {formatNumber(country.cases)}
+                        </li>
+                        <li>
+                          <b>Recovered:</b> {formatNumber(country.recovered)}
+                        </li>
+                        <li>
+                          <b>Deaths:</b> {formatNumber(country.deaths)}
+                        </li>
                       </ul>
                     </div>
                   </div>
