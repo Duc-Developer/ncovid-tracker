@@ -1,0 +1,36 @@
+.case-box-infor {
+  background-color: $primaryColor;
+  padding: 1em 0 1em 0;
+  border-radius: 5px;
+  cursor: pointer;
+
+  ul {
+    list-style-type: none;
+  }
+
+  &__text--white {
+    color: rgba(255, 255, 255);
+    font-size: 1.2em;
+  }
+
+  &__text--red {
+    color: rgb(255, 0, 0);
+    font-size: 2em;
+  }
+
+  &__text--green {
+    color: rgb(9, 255, 0);
+    font-size: 2em;
+  }
+
+  &--active {
+    border-top: 5px solid rgb(255, 0, 0);
+  }
+
+  &__sub-title::after {
+    content: ' total';
+    font-size: 0.8em;
+    color: rgb(168, 166, 166);
+  }
+
+}
