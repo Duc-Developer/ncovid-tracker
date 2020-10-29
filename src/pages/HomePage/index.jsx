@@ -7,6 +7,7 @@ import Axios from "../../api/axios";
 import CaseBoxInfor from "../../components/CaseBoxInfor";
 import Map from "../../components/Map";
 import TableCase from "../../components/TableCase";
+import LineGraphCase from "../../components/LineGraphCase";
 
 const { Title } = Typography;
 const initialCoordinates = { lat: 16, lng: 108 };
@@ -190,7 +191,9 @@ export default function HomePage() {
             <Col span={24}>
               <TableCase countries={countries} />
             </Col>
-            <Col span={24}>Chart</Col>
+            <Col span={24}>
+              <LineGraphCase />
+            </Col>
           </Row>
         </Col>
       </Row>
