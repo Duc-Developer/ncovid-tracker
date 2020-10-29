@@ -6,6 +6,7 @@ import CountrySelectField from "../../components/CountrySelectField";
 import Axios from "../../api/axios";
 import CaseBoxInfor from "../../components/CaseBoxInfor";
 import Map from "../../components/Map";
+import TableCase from "../../components/TableCase";
 
 const { Title } = Typography;
 const initialCoordinates = { lat: 16, lng: 108 };
@@ -186,7 +187,9 @@ export default function HomePage() {
         </Col>
         <Col lg={{ span: 8 }} xs={{ span: 24 }}>
           <Row gutter={[8, 8]}>
-            <Col span={24}>list case country</Col>
+            <Col span={24}>
+              <TableCase countries={countries} />
+            </Col>
             <Col span={24}>Chart</Col>
           </Row>
         </Col>
