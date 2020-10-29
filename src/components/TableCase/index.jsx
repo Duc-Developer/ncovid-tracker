@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Table, Pagination } from "antd";
 
+TableCase.propTypes = {
+    countries: PropTypes.array
+}
+
 const columns = [
   {
     title: <b style={{ fontSize: "1.2em" }}>Country</b>,
