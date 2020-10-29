@@ -8,7 +8,7 @@ const caseTypeColor = {
     multiplier: 300,
   },
   recovered: {
-    hex: "#7dd71d",
+    hex: "#008000",
     multiplier: 300,
   },
   deaths: {
@@ -61,15 +61,24 @@ export default function Map(props) {
                     </div>
                     <div className="map__infor-name">{country.country}</div>
                     <div className="map__infor-cases">
-                      <ul style={{ padding: 0}}>
+                      <ul style={{ padding: 0 }}>
                         <li>
-                          <b>Cases:</b> {formatNumber(country.cases)}
+                          <b>Cases:</b>
+                          <span style={{ color: caseTypeColor.cases.hex }}>
+                            {formatNumber(country.cases)}
+                          </span>
                         </li>
                         <li>
-                          <b>Recovered:</b> {formatNumber(country.recovered)}
+                          <b>Recovered:</b>
+                          <span style={{ color: caseTypeColor.recovered.hex }}>
+                            {formatNumber(country.recovered)}
+                          </span>
                         </li>
                         <li>
-                          <b>Deaths:</b> {formatNumber(country.deaths)}
+                          <b>Deaths:</b>
+                          <span style={{ color: caseTypeColor.deaths.hex }}>
+                            {formatNumber(country.deaths)}
+                          </span>
                         </li>
                       </ul>
                     </div>
